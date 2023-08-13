@@ -8,9 +8,11 @@ namespace HackerNews.Stories.Web.Controllers
     public class StoryController : ControllerBase
     {
         private readonly IStoryService _storyService;
-        public StoryController(IStoryService storyService) 
+        private readonly ILogger<StoryController> _logger;
+        public StoryController(IStoryService storyService, ILogger<StoryController> logger) 
         {
             _storyService = storyService;
+            _logger = logger;
         }
 
 
@@ -20,12 +22,17 @@ namespace HackerNews.Stories.Web.Controllers
             try
             {
                 var stories = await _storyService.GetAllStories();
-                return Ok(stories);
+                if(stories.Any())
+                {
+                    return Ok(stories);
+                }
+                return NoContent();
             }
             catch (Exception ex)
             {
-                throw;
+                _logger.LogError($"Fetch of story data failed! Message: {ex.Message}");
             }
+            return BadRequest("Something went wrong, please try again later.");
         }
     }
 }
