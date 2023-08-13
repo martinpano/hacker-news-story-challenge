@@ -42,7 +42,6 @@ namespace HackerNews.Stories.Services.Services
                         
 
                         _memoryCache.Set(CommonHelper.MEMORY_CACHE_KEY, newsStories, cacheConfig);
-                        _memoryCache.Dispose();
                     }
                 }
                 return newsStories;
