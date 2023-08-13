@@ -25,8 +25,9 @@ import { StoriesComponent } from './story/stories.component';
     BrowserAnimationsModule,
     FormsModule,
     RouterModule.forRoot([
-      { path: 'stories', component: StoriesComponent},
-      { path: '', component: HomeComponent, pathMatch: 'full' },
+      { path: 'home', component: HomeComponent },
+      { path: 'stories', component: StoriesComponent },
+      { path: '**', redirectTo: "home"},
     ]),
     BrowserAnimationsModule
   ],

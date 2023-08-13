@@ -31,10 +31,11 @@ export class StoriesComponent implements OnInit, OnDestroy, AfterViewInit {
 
   ngOnInit(): void {
     console.log(this.baseUrl);
-    this.storyService.getStoriesData(this.baseUrl + 'api/story')
+    this.sub = this.storyService.getStoriesData(this.baseUrl + 'api/story')
       .subscribe(data => {
         this.stories = data;
         this.dataSource = new MatTableDataSource<Story>(this.stories);
+        this.dataSource.paginator = this.paginator;
       });
   }
 
