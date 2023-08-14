@@ -10,7 +10,7 @@ import { StoryService } from './services/story.service';
   templateUrl: './stories.component.html',
   styleUrls: ['./stories.component.css']
 })
-export class StoriesComponent implements OnInit, OnDestroy, AfterViewInit {
+export class StoriesComponent implements OnInit, OnDestroy {
   private baseUrl!: string;
   stories!: Story[];
   sub!: Subscription;
@@ -30,7 +30,6 @@ export class StoriesComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngOnInit(): void {
-    console.log(this.baseUrl);
     this.sub = this.storyService.getStoriesData(this.baseUrl + 'api/story')
       .subscribe(data => {
         this.stories = data;
@@ -39,13 +38,7 @@ export class StoriesComponent implements OnInit, OnDestroy, AfterViewInit {
       });
   }
 
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-    //this.dataSource.sort = this.sort;
-  }
-
   ngOnDestroy(): void {
     this.sub.unsubscribe();
   }
-
 }

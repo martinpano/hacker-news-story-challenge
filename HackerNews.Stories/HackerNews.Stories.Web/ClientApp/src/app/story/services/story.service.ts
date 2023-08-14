@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
-import { Inject, Injectable } from '@angular/core';
+import {  Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { getBaseUrl } from '../../../main';
 import { Story } from '../models/story';
 
 @Injectable({
