@@ -31,16 +31,15 @@ namespace HackerNews.Stories.Services.Services
                 if (!_memoryCache.TryGetValue(CommonHelper.MEMORY_CACHE_KEY, out List<Story>? newsStories))
                 {
                     List<int> storyIds = await _httpService.GetData<List<int>>(CommonHelper.NEWS_STORY_BASE_URL);
-                    if (storyIds.Count > 0)
+                    if (storyIds != null && storyIds.Count > 0)
                     {
                         var allStoriesTasks = storyIds.Select(stId => _httpService.GetData<Story>($"{CommonHelper.SINGLE_STORY_URL}/{stId}.json?print=pretty"));
                         newsStories = (await Task.WhenAll(allStoriesTasks)).Where(st => st.Url != null).ToList();
 
                         var cacheConfig = new MemoryCacheEntryOptions()
-                            .SetAbsoluteExpiration(TimeSpan.FromMinutes(1))
+                            .SetAbsoluteExpiration(TimeSpan.FromMinutes(5))
                             .SetPriority(CacheItemPriority.Normal);
                         
-
                         _memoryCache.Set(CommonHelper.MEMORY_CACHE_KEY, newsStories, cacheConfig);
                     }
                 }
