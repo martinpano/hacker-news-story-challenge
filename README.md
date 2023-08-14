@@ -2,6 +2,10 @@
 This repository holds a source code for an application that fetches data from a given apie called Hacker News, caches it and displays it in
 a list on the UI. 
 
+## Azure website 
+You can access the hacker news site on the following link hosted on Azure
+https://hacker-news-api.azurewebsites.net/stories
+
 ## Technology stack ⚙️
 For the application needs the following technologies are used:
 * .NET 6 API - The backend is an API using the .NET 6 as framework
